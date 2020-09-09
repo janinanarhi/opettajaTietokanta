@@ -32,7 +32,7 @@
                             <td><%= opettaja.soitin %></td>
                             <td><%= opettaja.soitinryhmä %></td>
                             <td><%= opettaja.toimenkuva %></td>
-                            <td><%= opettaja.aloitusvuosi %></td> 
+                            <td><%= opettaja.aloitusvuosi.toLocaleDateString() %></td> 
                         </tr>
                     <% }); %>
                 </tbody>
