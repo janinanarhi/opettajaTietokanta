@@ -27,10 +27,12 @@
                     <% hakutulos.forEach(opettaja=> { %>
                         <tr>
                             <td><%= opettaja.opettajaID %></td>
-                            <td><%= opettaja.nimi %></td>
-                            <td><%= opettaja.tekija %></td>
-                            <td><%= opettaja.tyyppi %></td>
-                            <td><%= opettaja.sivut %></td> 
+                            <td><%= opettaja.sukunimi %></td>
+                            <td><%= opettaja.etunimi %></td>
+                            <td><%= opettaja.soitin %></td>
+                            <td><%= opettaja.soitinryhmä %></td>
+                            <td><%= opettaja.toimenkuva %></td>
+                            <td><%= opettaja.aloitusvuosi %></td> 
                         </tr>
                     <% }); %>
                 </tbody>

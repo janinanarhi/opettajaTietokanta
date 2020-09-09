@@ -27,7 +27,7 @@ thead {
 }
 
 tbody>tr:nth-child(even) {
-    background-color: blue;
+    background-color: blueviolet;
 }
 
 button {
