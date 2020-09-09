@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Muokkaa opettaja</title>
+    <link rel="stylesheet" href="/tyylit/tyylit.css" type="text/css">
+</head>
+
+<body>
+    <h1>Muokkaa opettaja <%= hakutulos.nimi %></h1>
+ 
+    <form action="/muokkaaOpettaja" method="post">
+
+        <label>opettajaID:
+            <input type="number" name="opettajaID" value="<%= hakutulos.opettajaID %>">
+        </label></br>
+        <label>sukunimi:
+            <input type="text" name="sukunimi" value="<%= hakutulos.sukunimi %>">
+        </label></br>
+        <label>etunimi:
+            <input type="text" name="etunimi" value="<%= hakutulos.etunimi %>">
+        </label></br>
+        <label>soitin:
+            <input type="text" name="soitin" value="<%= hakutulos.soitin %>">
+        </label></br>
+        <label>soitinryhmä:
+            <input type="text" name="soitinryhmä" value="<%= hakutulos.soitinryhmä %>">
+        </label></br>
+        <label>toimenkuva:
+            <input type="text" name="toimenkuva" value="<%= hakutulos.toimenkuva %>">
+        </label></br>
+        <label>aloitusvuosi:
+            <input type="date" name="aloitusvuosi" value="<%= hakutulos.aloitusvuosi %>">
+        </label></br>
+
+        <button type="submit">Muokkaa</button>
+    </form>
+ 
+    <p>
+        <a href="/"><button>Hakusivulle</button></a>
+    </p>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+.auto img{
+    height: 60px;
+}
+
+.eiloydy{
+    color: red;
+}
+
+fieldset {
+    border-color: lightgray;
+    border-style: ridge;
+    border-width: thin;
+    width: 250px;
+}
+
+table {
+    border-collapse: separate;
+}
+
+table, td, th {
+    border: 3px solid black;
+    padding: 0.5em;
+}
+
+thead {
+    background-color:  yellowgreen;
+}
+
+tbody>tr:nth-child(even) {
+    background-color: blue;
+}
+
+button {
+    width: 200px;
+    margin: 5px 50px;
+}
+
+input {
+    margin: 10px 0px;
+}

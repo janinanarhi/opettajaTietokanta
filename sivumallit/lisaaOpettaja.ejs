@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lisää Opettaja</title>
+    <link rel="stylesheet" href="/tyylit/tyylit.css" type="text/css">
+</head>
+
+<body>
+    <h1>Lisää Opettaja</h1>
+ 
+    <form action="/lisaaOpettaja" method="post">
+
+        <label>opettajaID:
+            <input type="number" name="opettajaID">
+        </label></br>
+        <label>sukunimi:
+            <input type="text" name="sukunimi">
+        </label></br>
+        <label>etunimi:
+            <input type="text" name="etunimi">
+        </label></br>
+        <label>soitin:
+            <input type="text" name="soitin">
+        </label></br>
+        <label>soitinryhmä:
+            <input type="text" name="soitinryhmä">
+        </label></br>
+        <label>toimenkuva:
+            <input type="text" name="toimenkuva">
+        </label></br>
+        <label>aloitusvuosi:
+            <input type="date" name="aloitusvuosi">
+        </label></br>
+
+        <button type="submit">Lisää</button>
+    </form>
+ 
+    <p>
+        <a href="/"><button>Hakusivulle</button></a>
+    </p>
+</body>
+
+</html>
