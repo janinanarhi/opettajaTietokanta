@@ -3,7 +3,7 @@
 
 const http = require('http');
 const path = require('path');
-const express = require('express'); 
+const express = require('express');
 
 const app = express();
 app.use(express.json());
@@ -16,8 +16,8 @@ const Opettajakanta = require('./tietovarasto/opettajavarasto.js');
 const kanta = new Opettajakanta({
     host: 'localhost',
     port: 3306,
-    user: 'jyrki',
-    password: 'pAg2iq1C',
+    user: 'janina',
+    password: 'P030609n',
     database: 'opettajatietokanta'
 });
 
@@ -29,24 +29,24 @@ app.set('views', path.join(__dirname, 'sivumallit'));
 
 app.use(express.static(path.join(__dirname, 'resurssit')));
 
-const palvelin = http.createServer(app); 
+const palvelin = http.createServer(app);
 
 app.get('/', (req, res) => res.sendFile(kotipolku));
 
 app.get('/opettajat', async (req, res) => {
     try {
-        const hakutulos = await kanta.haeKaikki(); 
-        console.log('HAKUTULOS',hakutulos) 
+        const hakutulos = await kanta.haeKaikki();
+        console.log('HAKUTULOS', hakutulos)
         res.render('tulostaulukolla', { hakutulos });
     } catch (virhe) {
         console.log('ERRORI!!', virhe)
         res.render('virhe', { viesti: virhe });
     }
 });
- 
+
 app.get('/haeOpettaja', async (req, res) => {
     try {
-        res.render('haeOpettaja'); 
+        res.render('haeOpettaja');
     } catch (virhe) {
         console.log('ERRORI!!', virhe)
         res.render('virhe', { viesti: virhe });
@@ -111,6 +111,7 @@ app.post('/haeMuokattavaOpettaja', express.urlencoded({ extended: false }), asyn
         let hakutulos = await kanta.hae(req.body.opettajaID);
         //hakutulos = [hakutulos]
         console.log('HAKUTULOS', hakutulos)
+        //console.log('ALOITUSVUOSI', hakutulos.aloitusvuosi.toLocaleDateString('fi', 'FI').split('T')[0])
         res.render('muokkaaOpettaja', { hakutulos });
     } catch (virhe) {
         console.log('ERRORI!!', virhe)
@@ -118,10 +119,10 @@ app.post('/haeMuokattavaOpettaja', express.urlencoded({ extended: false }), asyn
     }
 });
 
-app.post('/muokkaaOPettaja', express.urlencoded({ extended: false }), async (req, res) => {
+app.post('/muokkaaOpettaja', express.urlencoded({ extended: false }), async (req, res) => {
     console.log('Muokkaa opettaja', req.body)
     try {
-        let hakutulos = await kanta.muokkaa( req.body.opettajaID,{
+        let hakutulos = await kanta.muokkaa(req.body.opettajaID, {
             opettajaID: req.body.opettajaID,
             sukunimi: req.body.sukunimi,
             etunimi: req.body.etunimi,
@@ -147,7 +148,6 @@ app.get('/poista', async (req, res) => {
     }
 });
 
-
 app.post('/poistaOpettaja', express.urlencoded({ extended: false }), async (req, res) => {
     console.log('poista opettaja', req.body)
     try {
@@ -161,10 +161,9 @@ app.post('/poistaOpettaja', express.urlencoded({ extended: false }), async (req,
     }
 });
 
-  
+
 
 app.all('*', (req, res) =>
     res.status(404).render('virhe', { viesti: 'Resurssia ei löydy' }));
 
 palvelin.listen(port, host, () => console.log(`Palvelin ${host} portissa ${port}`));
- 

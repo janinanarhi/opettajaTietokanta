@@ -7,11 +7,11 @@ create table opettajatietokanta.opettaja(
     etunimi varchar(50) not null, 
     soitin varchar(55) not null,
     soitinryhmä varchar(32) not null,
-    toimenkuva varchar(55) null,
-    aloitusvuosi date null
+    toimenkuva varchar(55) not null,
+    aloitusvuosi date not null
 );
 
-create user if not exists 'janina'@'localhost' identified by 'P030609';
+create user if not exists 'janina'@'localhost' identified by 'P030609n';
 grant all privileges on opettajatietokanta.* to 'janina'@'localhost';
 
 insert into opettajatietokanta.opettaja (opettajaID, sukunimi, etunimi, soitin, soitinryhmä, toimenkuva, aloitusvuosi)

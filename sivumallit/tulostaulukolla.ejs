@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="fi">
+
 <head>
     <meta charset="UTF-8">
     <title>Hakutulos</title>
     <link rel="stylesheet" href="/tyylit/tyylit.css" type="text/css">
 </head>
+
 <body>
     <h1>Hakutulos</h1>
     <div>
         <% if(hakutulos.length===0) { %>
-            <h3 class="eiloydy">Hakuehdoilla ei löytynyt opettajia.</h3>
+        <h3 class="eiloydy">Hakuehdoilla ei löytynyt opettajia.</h3>
         <% } else { %>
-            <table> 
-                <thead>
-                    <tr>
-                        <th>ID</th> 
-                        <th>Sukunimi</th>
-                        <th>Etunimi</th>
-                        <th>Soitin</th>
-                        <th>Soitinryhmä</th>
-                        <th>Toimenkuva</th>
-                        <th>Aloitusvuosi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% hakutulos.forEach(opettaja=> { %>
-                        <tr>
-                            <td><%= opettaja.opettajaID %></td>
-                            <td><%= opettaja.sukunimi %></td>
-                            <td><%= opettaja.etunimi %></td>
-                            <td><%= opettaja.soitin %></td>
-                            <td><%= opettaja.soitinryhmä %></td>
-                            <td><%= opettaja.toimenkuva %></td>
-                            <td><%= opettaja.aloitusvuosi.toLocaleDateString() %></td> 
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Sukunimi</th>
+                    <th>Etunimi</th>
+                    <th>Soitin</th>
+                    <th>Soitinryhmä</th>
+                    <th>Toimenkuva</th>
+                    <th>Aloitusvuosi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% hakutulos.forEach(opettaja=> { %>
+                <tr>
+                    <td><%= opettaja.opettajaID %></td>
+                    <td><%= opettaja.sukunimi %></td>
+                    <td><%= opettaja.etunimi %></td>
+                    <td><%= opettaja.soitin %></td>
+                    <td><%= opettaja.soitinryhmä %></td>
+                    <td><%= opettaja.toimenkuva %></td>
+                    <td><%= opettaja.aloitusvuosi %></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
         <% } %>
     </div>
     <p>
         <a href="/"><button>Hakusivulle</button></a>
     </p>
 </body>
+
 </html>

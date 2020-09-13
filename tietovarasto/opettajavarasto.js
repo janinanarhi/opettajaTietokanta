@@ -15,6 +15,18 @@ const virhe = virhe => {
 const opettajantiedot = opettaja => [+opettaja.opettajaID, opettaja.sukunimi, opettaja.etunimi, opettaja.soitin, opettaja.soitinryhmä, opettaja.toimenkuva, opettaja.aloitusvuosi];
 const paivitysTiedot = opettaja => [opettaja.sukunimi, opettaja.etunimi, opettaja.soitin, opettaja.soitinryhmä, opettaja.toimenkuva, opettaja.aloitusvuosi, +opettaja.opettajaID]
 
+const paivaysSuomenAikaan = (aloitusvuosi) => {
+    const osat = aloitusvuosi.toLocaleDateString('fi-FI').split('T')[0].split('-')
+    let kuukausi = osat[1]
+    if (kuukausi < 10) {
+        kuukausi = '0' + kuukausi
+    }
+    let paiva = osat[2]
+    if (paiva < 10) {
+        paiva = '0' + paiva
+    }
+    return osat[0] + '-' + kuukausi + '-' + paiva
+}
 
 //sql-lauseet
 const haeKaikkiSql = 'SELECT opettajaID, sukunimi, etunimi, soitin, soitinryhmä, toimenkuva, aloitusvuosi from opettaja';
@@ -29,12 +41,18 @@ module.exports = class Opettajakanta {
         this.varasto = new Tietokanta(optiot);
     }
 
+
+
     haeKaikki() {
         return new Promise(async (resolve, reject) => {
             try {
                 const tulos = await this.varasto.suoritaKysely(haeKaikkiSql);
                 if (tulos.tulosjoukko) {
-                    resolve(tulos.kyselynTulos);
+                    const kaikkiOpettajat = tulos.kyselynTulos.map(opettaja => ({
+                        ...opettaja,
+                        aloitusvuosi: paivaysSuomenAikaan(opettaja.aloitusvuosi)
+                    }))
+                    resolve(kaikkiOpettajat);
                 }
                 else {
                     reject(ohjelmavirhe());
@@ -52,7 +70,14 @@ module.exports = class Opettajakanta {
                 const tulos = await this.varasto.suoritaKysely(haeOpettajaSql, [+opettajaID]);
                 if (tulos.tulosjoukko) {
                     if (tulos.kyselynTulos.length > 0) {
-                        resolve(tulos.kyselynTulos[0]);
+                        const hakutulos = tulos.kyselynTulos[0]
+                        console.log('HAE OPETTAJA TULOS', hakutulos)
+                        const aloitusvuosi = paivaysSuomenAikaan(hakutulos.aloitusvuosi)
+
+                        resolve({
+                            ...hakutulos,
+                            aloitusvuosi
+                        });
                     }
                     else {
                         // resolve({ viesti: `Numerolla ${kirjaID} ei löytynyt opettajaa` });
@@ -127,7 +152,7 @@ module.exports = class Opettajakanta {
                         resolve({ viesti: `Opettaja numerolla ${opettajaID} poistettiin.` });
                     }
                     else {
-                        reject(virhe('Opettajaa ei poistettu' ));
+                        reject(virhe('Opettajaa ei poistettu'));
                     }
                 }
                 else {

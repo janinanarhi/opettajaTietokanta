@@ -18,8 +18,8 @@ table {
 }
 
 table, td, th {
-    border: 3px solid black;
-    padding: 0.5em;
+    border: 2px solid black;
+    padding: 0.7em;
 }
 
 thead {
@@ -27,12 +27,15 @@ thead {
 }
 
 tbody>tr:nth-child(even) {
-    background-color: blueviolet;
+    background-color: royalblue;
 }
 
 button {
     width: 200px;
+    height: 30px;
     margin: 5px 50px;
+    background-color: lime;
+    font-weight: bold;
 }
 
 input {
